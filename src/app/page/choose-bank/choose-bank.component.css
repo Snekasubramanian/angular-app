@@ -1,0 +1,30 @@
+ ::ng-deep.mat-pseudo-checkbox{
+      display: none !important;
+    }
+
+    ::ng-deep.gray{
+        background-color: rgba(0,0,0,.12) !important;
+    }
+    .mat-mdc-card{
+      cursor: pointer;
+    }
+    /* .mat-mdc-option {
+      background-color: transparent ;
+    }
+    
+    ::ng-deep.mat-option:hover {
+    background:transparent !important;
+  } */
+  
+  /* .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple){
+    background-color: transparent !important;
+  }
+
+  ::ng-deep.mdc-list-item__primary-text{
+    color: #202020 !important;
+  }
+  ::ng-deep.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple){
+    background-color: transparent !important;
+  } */
+
+ 

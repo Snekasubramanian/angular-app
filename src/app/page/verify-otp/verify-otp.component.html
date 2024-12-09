@@ -1,0 +1,34 @@
+<div class="verify-mobile">
+  <h5>Verify your mobile number</h5>
+  <p>
+    You will receive a 6-digit code on your phone number
+    <span class="mobileNumber" *ngIf="!!secondary_number">+91 {{secondary_number}}</span>
+    <span class="mobileNumber" *ngIf="secondary_number==''">+91 {{XORDecryptRes.mobile}}</span>
+    from CAMSfinserv
+  </p>
+</div>
+<div class="otpinput">
+  <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+  <div class="otperrormessage">
+    <p class="success-opt">message</p>
+    <p *ngIf="!!otpmessage" class="text-center success-msg">{{otpmessage}}</p>
+  </div>
+</div>
+<div class="receive_txt">
+  <span class='OTP_txt'>Didn’t receive it?</span>
+  <button *ngIf="resendbtn" [disabled]="disableresend>2" class="ResendOTP_txt" (click)="resendotp()">&nbsp;Resend</button>
+  <span *ngIf="!resendbtn" class="OTP_txt"> Resend in <span class="OTP_timer">
+      <countdown #cd [config]="{leftTime: 15,format:'ss'}" (event)="onTimerFinished($event)"></countdown>
+    </span></span>
+</div>
+<div class="verify-otpages">
+  <button *ngIf="!loader" class='bottom-button' [disabled]="otp<6">Confirm</button>
+  <button *ngIf="loader" class='bottom-button'>
+    <img src="../../../assets/images/music.gif" alt="">
+  </button>
+  <!-- footer -->
+  <div class='footer_main'>
+    <span class="footer_text">Powered by RBI regulated Account Aggregator</span><img class='footer_image'
+      src="../../../assets/images/logo.svg" />
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="gif_image" *ngIf="flag=='Yes'">
+  <img class='success_img' src="../../../assets/images/acc_success.gif" />
+  <span class='acc_title'>Accounts connected!</span>
+  <p class='acc_subtitle'>Securely sharing your details with<br /> {{XORDecryptRes.fiuName}}</p>
+ 
+  <!-- <div class="gif-submit">
+      <h5 class='acc_title'>Your consent has been submitted already!</h5>
+      <div class="already-submitted">
+        <img src="../../../assets/images/success.svg" alt="" />
+        <p>To view and manage your consents,  use <span class='cams-letter'>CAMS</span><span class='fiserve-text'>finserv</span> website/mobile app.</p>
+      </div>
+    </div> -->
+</div>
+
+<div class="gif_image" *ngIf="flag=='No'">
+  <img class='not_loading_gif' src="../../../assets/images/not_loading.gif" />
+  <h5 class='acc_title'>Accounts not connected!</h5>
+  <p class='acc_subtitle'>Redirecting to <span>{{XORDecryptRes.fiuName}} </span></p>
+</div>

@@ -1,0 +1,24 @@
+<div class="" [formGroup]="Validation">
+  <div class="mobile_page">
+    <label *ngIf="EnableFlag =='ModifyMobile'" class="Modify_no">Modify mobile number</label>
+    <label *ngIf="EnableFlag =='AddMobile'" class="Modify_no">Add mobile number</label>
+    <label *ngIf="EnableFlag =='PAN'" class="Modify_no">Enter your PAN</label>
+    <div class="flex flex-row items-center">
+      <input type="text" formControlName="Number" style="text-transform: uppercase" (keypress)="NumberValidation($event)" autoFocus placeholder="{{somePlaceholder}}" maxlength="10" class="input_mobile" />
+    </div>
+    <div *ngIf="error" class="text-[#DF3C27] text-[11px] flex flex-row mt-[9px]">
+      <img src={image.errorsvg} alt="errorLogo" class="max-w-[100%] max-h-[100%] mr-[5px]" />
+      <div>
+        Please enter a valid 10-digit mobile number
+      </div>
+    </div>
+  </div>
+
+  <div class='bottom-card '>
+    <button class="bottom-button" [disabled]="!Validation.valid" (click)="handleClick()">{{buttonName}}</button>
+    <div class='footer_main'>
+      <span class="footer_text">Powered by RBI regulated Account Aggregator</span><img class='footer_image'
+        src="../../../assets/images/logo.svg" />
+    </div>
+  </div>
+</div>

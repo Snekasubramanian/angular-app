@@ -1,0 +1,180 @@
+<div class='consent-design' [formGroup]="ConsentForm">
+  <div class=''>
+    <div class=' drawer-height consent-height'>
+      <div class='consent-bottom'>
+        <img class=' secure_icon' src="../../../../assets/images/Secure.gif" alt='tick' />
+        <h2 class='consent_header'>
+          Securely connect accounts
+        </h2>
+        <h4 class='consent_subTitle'>
+          RBI Regulated CAMSfinserv enables you to securely share your financial data with {{consentData.FIUNAME}},
+          ensuring 100% safety through end-to-end encryption.
+        </h4>
+      </div>
+      <!-- single consent -->
+      <div *ngIf="data.consent.length == 1" class="consent_height">
+        <div class="link-boxx">
+          <div class='consent_box'>
+            <div class='top_consent'>
+              <h6 class='constent_detail_title'>
+                Purpose
+              </h6>
+              <h5 class='constent_detail_subTitle'>
+                {{consentData.PURPOSEDESC}}
+              </h5>
+            </div>
+            <div class='top_consent'>
+              <h6 class='constent_detail_title'>
+                Details will be shared from
+              </h6>
+              <h5 class='constent_detail_subTitle'>
+                {{consentData.FIDATAFROMDATE | date:"d/MM/yyyy" }} to {{consentData.FIDATATODATE | date:"d/MM/yyyy" }}
+              </h5>
+            </div>
+            <div class='top_consent'>
+              <h6 class='constent_detail_title'>
+                Details will be updated
+              </h6>
+              <h5 class='constent_detail_subTitle'>
+                {{consentData.FREQUENCYVALUE}} times in a {{consentData.FREQUENCYUNIT | titlecase}}
+              </h5>
+            </div>
+            <div id='divModalContent' [ngClass]="view ? 'view-consent' : 'hidden'">
+              <div class='consent_bottoms'>
+                <h6 class='constent_detail_title'>
+                  Consent requested on
+                </h6>
+                <h5 class='constent_detail_subTitle'>
+                  {{consentData.CONSENTSTARTDATETIME | date:"d/MM/yyyy"}}
+                </h5>
+              </div>
+              <div class='consent_bottom'>
+                <h6 class='constent_detail_title'>
+                  Consent will be expired on
+                </h6>
+                <h5 class='constent_detail_subTitle'>
+                  {{consentData.CONSENTEXPIRYDATETIME | date:"d/MM/yyyy"}}
+                </h5>
+              </div>
+
+              <div class='consent_bottom'>
+                <h6 class='constent_detail_title'>
+                  Information shared
+                </h6>
+                <h5 class='constent_detail_subTitle consent-line'>
+                  <span class='capitalize'>Account Information: {{consentData.CONSENTTYPES?.toLocaleLowerCase().replaceAll(',', ', ')}}</span>
+                  <span class='capitalize consent_bottom'>Account Type: {{consentData.FITYPES?.toLocaleLowerCase().replaceAll(',', ', ')}}</span>
+                </h5>
+
+              </div>
+            </div>
+            <div
+            id='viewMoreDiv'
+            class='view-flex'
+            (click)="viewMoreClick()">
+            <div class=''>
+                 <p *ngIf="view" class='view_more'> View Less</p> 
+                 <p *ngIf="!view" class='view_more'>View More </p>
+            </div>
+                <img *ngIf="view" src="../../../../assets/images/expand_false.png"/>
+                <img *ngIf="!view" src="../../../../assets/images/expand_true.png"/>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- single consent end -->
+      <!-- multi consent -->
+      <div class="multi-consets" *ngIf="data.consent.length > 1">
+        <mat-tab-group (selectedTabChange)="tabChanged($event)" headerPosition="below" [selectedIndex]="data.index">
+          <mat-tab label="First" *ngFor="let item of data.consent; let i = index">
+            <div class="consent_height">
+              <div class="consent-header">
+                <div class='checkbox-consent'>
+                  <input type="checkbox" name="list-radio" [formControlName]="item.CONSENTHANDLE" class='radio-design' [value]="ConsentForm.value[item.CONSENTHANDLE]" />
+                  <h6>Consent {{i+1}}</h6>
+                </div>
+                <p *ngIf="consentData.required == 'Y'">Required</p>
+                <p *ngIf="consentData.required == 'N'">Optional</p>
+              </div>
+              <div class="link-boxx">
+                <div class='consent_box'>
+                  <div class='top_consent'>
+                    <h6 class='constent_detail_title'>
+                      Purpose
+                    </h6>
+                    <h5 class='constent_detail_subTitle'>
+                      {{consentData.PURPOSEDESC}}
+                    </h5>
+                  </div>
+                  <div class='top_consent'>
+                    <h6 class='constent_detail_title'>
+                      Details will be shared from
+                    </h6>
+                    <h5 class='constent_detail_subTitle'>
+                      {{consentData.FIDATAFROMDATE | date:"d/MM/yyyy" }} to {{consentData.FIDATATODATE |
+                      date:"d/MM/yyyy"
+                      }}
+                    </h5>
+                  </div>
+                  <div class='top_consent'>
+                    <h6 class='constent_detail_title'>
+                      Details will be updated
+                    </h6>
+                    <h5 class='constent_detail_subTitle'>
+                      {{consentData.FREQUENCYVALUE}} times in a {{consentData.FREQUENCYUNIT}}
+                    </h5>
+                  </div>
+                  <div id='divModalContent' [ngClass]="view ? '' : 'hidden'">
+                    <div class='consent_bottoms'>
+                      <h6 class='constent_detail_title'>
+                        Consent requested on
+                      </h6>
+                      <h5 class='constent_detail_subTitle'>
+                        {{consentData.CONSENTSTARTDATETIME | date:"d/MM/yyyy"}}
+                      </h5>
+                    </div>
+                    <div class='consent_bottom'>
+                      <h6 class='constent_detail_title'>
+                        Consent will be expired on
+                      </h6>
+                      <h5 class='constent_detail_subTitle'>
+                        {{consentData.CONSENTEXPIRYDATETIME | date:"d/MM/yyyy"}}
+                      </h5>
+                    </div>
+
+                    <div class='consent_bottom'>
+                      <h6 class='constent_detail_title'>
+                        Information shared
+                      </h6>
+                      <h5 class='constent_detail_subTitle consent-line'>
+                        <p class='capitalize'>Account Information: {{consentData.CONSENTTYPES?.toLocaleLowerCase()}}</p>
+                        <p class='capitalize consent_bottom'>Account Type: {{consentData.FITYPES?.toLocaleLowerCase()}}
+                        </p>
+                      </h5>
+
+                    </div>
+                  </div>
+                  <div
+                  id='viewMoreDiv'
+                  class='view-flex'
+                  (click)="viewMoreClick()">
+                  <div class=''>
+                       <p *ngIf="view" class='view_more'> View Less</p> 
+                       <p *ngIf="!view" class='view_more'>View More </p>
+                  </div>
+                      <img *ngIf="view" src="../../../../assets/images/expand_false.png"/>
+                      <img *ngIf="!view" src="../../../../assets/images/expand_true.png"/>
+                </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <!-- mutlti consent end -->
+    </div>
+  </div>
+  <div class='consent-button'>
+    <button (click)="openLink($event)" [disabled]="disable()" class="bottom-button">Got it!</button>
+  </div>
+</div>

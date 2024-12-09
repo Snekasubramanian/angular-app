@@ -1,0 +1,15 @@
+<div class="list-modal">
+    <div class="list-bank">
+        <h5 *ngIf="isBank">List of available banks</h5>
+        <h5 *ngIf="!isBank">List of available insurer</h5>
+
+        <ul>
+            <li *ngFor="let item of data">{{item.FIPNAME}}</li>
+        </ul>
+    </div>
+
+    <div class="list-button">
+        <button class='button-close' (click)="close()">Close</button>
+    </div>
+
+</div>

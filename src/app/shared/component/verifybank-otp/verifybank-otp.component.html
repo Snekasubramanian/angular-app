@@ -1,0 +1,60 @@
+<div *ngIf="!shimmer">
+  <div class="verify-modal">
+    <h6>
+      Link accounts </h6>
+    <div class="verify-account">
+      <p class="otp-text">
+        You will receive a 6-digit code on your phone number
+        <span class="otp-mobileNumber">+91 {{XORDecryptRes.mobile}}</span> from {{data[0].FIPNAME}}
+      </p>
+      <div class="otp-inputField">
+        <ng-otp-input #ngOtpInput (onInputChange)="onOtpChange($event)" [config]="config"
+          class=" otpContainerClass"></ng-otp-input>
+        <div class="otperrormessage">
+          <p class="success-opt">message</p>
+          <p *ngIf="!!otpmessage" class="text-center success-msg">{{otpmessage}}</p>
+        </div>
+        <div class='ResendOtpText'>
+          <span class='OTP_txt'>Didn’t receive it?</span>
+          <button *ngIf="resendbtn" class="ResendOTP_txt" (click)="resendotp()">&nbsp;Resend</button>
+          <span *ngIf="!resendbtn" class='OTP_txt'> Resend in <span class='Timer'>
+              <countdown #cd [config]="{leftTime: 15,format:'ss'}" (event)="onTimerFinished($event)"></countdown>
+            </span></span>
+        </div>
+      </div>
+    </div>
+    <div class='otpSubmitButton'>
+      <button  *ngIf="!loader" [disabled]="disable()">Confirm</button>
+        <button *ngIf="loader" class="otp-button"><img src='../../../../assets/images/music.gif' /></button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="shimmer">
+  <div class="cards-link">
+    <div class="verifyBank">
+      <h6> Link accounts</h6>
+      <div class="loading-title">
+        <div class="paragraph "></div>
+        <div class="paragraph-sub "></div>
+        <div class=" shimmerBG dicover-shimmer"></div>
+      </div>
+      <div class="otp-boxlottie">
+        <div class="otp-lotties">
+          <div class="boxes-otp "></div>
+          <div class="boxes-otp "></div>
+          <div class="boxes-otp "></div>
+          <div class="boxes-otp "></div>
+          <div class="boxes-otp "></div>
+          <div class="boxes-otp "></div>
+        </div>
+        <div class="paragraph-resent "></div>
+        <div class=" shimmerBG dicover-shimmer"></div>
+      </div>
+      <div class="verify-shimmer">
+        <div class="button-lottie  verify-lottie-bottom"></div>
+        <div class=" shimmerBG dicover-shimmer"></div>
+      </div>
+    </div>
+  </div>
+</div>

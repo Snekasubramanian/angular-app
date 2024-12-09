@@ -1,0 +1,29 @@
+<!-- something went wrong start -->
+<div *ngIf="!reminder" class="some-wrong">
+    <div class="">
+        <img src="../../../assets/images/something.svg" alt="" />
+        <div class="something-title">
+            <h5>Oh no! Something went wrong!</h5>
+            <p>Please check your network and try again.</p>
+        </div>
+    </div>
+    <div class="retry-button">
+        <button>Retry</button>
+    </div>
+</div>
+
+<!-- something went wrong -->
+<!-- Remindar -->
+<div class="some-wrong" *ngIf="reminder">
+    <div class="">
+        <img src="../../../assets/images/reminder.svg" alt="" class='remaind-img' />
+        <div class="something-title">
+            <h5>Thanks for your interest!</h5>
+            <p>Will notify you shortly.</p>
+        </div>
+    </div>
+    <div class="retry-button">
+        <button>Close</button>
+    </div>
+</div>
+<!-- remindar -->

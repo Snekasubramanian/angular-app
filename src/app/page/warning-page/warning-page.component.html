@@ -1,0 +1,73 @@
+ 
+  <div class="warning-pages">
+    <div class="warning-head">
+      <h6>
+        Oh no! We were unable to discover your accounts </h6>
+      <p *ngIf="currentCategory.match('BANK')">
+        There are no accounts linked to +91 {{XORDecryptRes.mobile}}
+      </p>
+      <p *ngIf="currentCategory.match('GSTR')">
+        There are no GST linked to {{XORDecryptRes.pan}} and +91 {{XORDecryptRes.mobile}}
+      </p>
+      <p *ngIf="currentCategory.match('MF')">
+        There are no mutual fund linked to {{XORDecryptRes.pan}} and +91 {{XORDecryptRes.mobile}}
+      </p>
+      <p *ngIf="currentCategory.match('EQUITIES')">
+        There are no investments linked to {{XORDecryptRes.pan}} and +91 {{XORDecryptRes.mobile}}
+      </p>
+      <p *ngIf="currentCategory.match('NPS')">
+        Your NPS account is not linked to +91 {{XORDecryptRes.mobile}}
+      </p>
+      <p *ngIf="currentCategory.match('INSURANCE_POLICIES')">
+        There are no policy linked to +91 {{XORDecryptRes.mobile}}
+      </p>
+    </div>
+    <div class="banks-design" *ngIf="!remindlater && (currentCategory == 'INSURANCE_POLICIES' || currentCategory == 'BANK')">
+      <span *ngIf="currentCategory == 'BANK'" class='bankheading'>Selected banks</span>
+      <span *ngIf="currentCategory == 'INSURANCE_POLICIES'" class='bankheading'>Selected Insurer</span>
+      <div class='bankcards' >
+        <div class="" [ngClass]="currentCategory == 'INSURANCE_POLICIES'? 'insure-list' : 'selectbanklist'" *ngFor="let item of discoverBankResponse;let i = index">
+          <div class='banklist' >
+            <div class='bankcardlist'>
+              <img [src]="getLogo(item.Logo)" class="img-size" />
+              <span>{{item.FIPNAME}}</span>
+            </div>
+            <div class='closeBtn'>
+              <button *ngIf="discoverBankResponse.length > 1" (click)="deleteCard(i)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                  <path
+                    d="M13.1668 4.27325L12.2268 3.33325L8.50016 7.05992L4.7735 3.33325L3.8335 4.27325L7.56016 7.99992L3.8335 11.7266L4.7735 12.6666L8.50016 8.93992L12.2268 12.6666L13.1668 11.7266L9.44016 7.99992L13.1668 4.27325Z"
+                    fill="#A5A5A5" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!remindlater &&  (currentCategory == 'INSURANCE_POLICIES' || currentCategory == 'BANK')" class='straight-line'>
+    </div>
+    <div class="card-list">
+      <div *ngFor="let list of displayList">
+        <div class="warning-cartbox" (click)="handleCardClick(list.id)"
+          [ngClass]="selectedCard == list.id ? 'carddetails' : ''">
+          <label class="w-full card-gapss">
+            <h6>
+              {{list.heading}}
+            </h6>
+            <p>
+              {{list.description}}
+            </p>
+          </label>
+          <input type="radio" [checked]="selectedCard == list.id" class="border-warn" />
+        </div>
+      </div>
+    </div>
+  </div>  
+<div class='bottom_card warning-bottom'>
+  <button class="bottom-button" (click)="submitbtn()">{{buttonName}}</button>
+  <div class='footer_main'>
+    <span class="footer_text">Powered by RBI regulated Account Aggregator</span><img class='footer_image'
+      src="../../../assets/images/logo.svg" />
+  </div>
+</div>

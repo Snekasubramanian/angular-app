@@ -1,0 +1,33 @@
+<div class='flex flex-col justify-end  '>
+  <div class='warning-deny'>
+    <img class='warning-gif' src="../../../../assets/images/warning.gif" />
+    <h6>Are you sure you won't connect?</h6>
+    <p>Please select a reason why are you denying the consent:</p>
+  </div>
+  <div class='flex flex-col warning-designs '>
+    <ul class='exit-fullbox '>
+      <li class=' ' *ngFor="let list of bankFi">
+        <div class='exit-box' (click)="handleRadioClick(list.name)">
+          <input readOnly [value]='list.name' [checked]="selectedCard == list.name" type='radio'
+            class='suggest-radio' />
+          <label class='w-full suggest-radio-text'>{{list.name}}</label>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class='offer_card'>
+    <span class='offer_text'>
+      Over 3 lakh users have securely shared their account details for 100% accurate financial data for a faster,
+      seamless processing.
+    </span>
+  </div>
+
+  <div class='flex justify-between deny-exited'>
+    <div class='w-full '>
+      <button class='bottom-gray'[disabled]="selectedCard == ''" (click)="exit()">Deny and Exit</button>
+    </div>
+    <div class=' w-full'>
+      <button class='bottom-button' (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

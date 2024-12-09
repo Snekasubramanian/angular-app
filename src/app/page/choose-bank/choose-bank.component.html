@@ -1,0 +1,91 @@
+<!-- <div class="h-screen bg-[var(--Background_color)] overflow-y-auto"> -->
+
+<div class="page-container">
+    <h6 *ngIf="isBank">Choose bank accounts</h6>
+    <h6 *ngIf="!isBank">Choose your policy insurer</h6>
+    <div class="search-gap">
+        <div class="search-box">
+
+            <input type="text" placeholder="{{placeholder}}" aria-label="Number" matInput [(ngModel)]="myControl"
+                (input)="Filterdata()" #trigger="matAutocompleteTrigger" [matAutocomplete]="auto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <g clip-path="url(#clip0_4053_1332)">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M2.08301 7.33325C2.08301 4.43376 4.43351 2.08325 7.33301 2.08325C10.2325 2.08325 12.583 4.43376 12.583 7.33325C12.583 10.2327 10.2325 12.5833 7.33301 12.5833C4.43351 12.5833 2.08301 10.2327 2.08301 7.33325ZM7.33301 0.583252C3.60509 0.583252 0.583008 3.60533 0.583008 7.33325C0.583008 11.0612 3.60509 14.0833 7.33301 14.0833C8.92677 14.0833 10.3915 13.5309 11.5463 12.6072L13.8027 14.8636C14.0956 15.1565 14.5704 15.1565 14.8633 14.8636C15.1562 14.5707 15.1562 14.0958 14.8633 13.8029L12.6069 11.5465C13.5307 10.3918 14.083 8.92701 14.083 7.33325C14.083 3.60533 11.0609 0.583252 7.33301 0.583252Z"
+                        fill="#717784" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_4053_1332">
+                        <rect width="16" height="16" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <div class="bank-searches">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of Banklist" [ngClass]="option.isChecked ? 'gray' : ''"
+                        [value]="option.FIPID" (click)="getfip(option.FIPID);open(trigger); $event.stopPropagation()">
+                        {{option.FIPNAME}}
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <!-- <img src="../../../assets/images/loader.svg" alt="" /> -->
+        </div>
+        <span class='show-text' *ngIf="isBank" (click)="Showlist()">Show available banks</span>
+        <span class='show-text' *ngIf="!isBank" (click)="Showlist()">Show available insurer</span>
+    </div>
+    <div class="choose-heightsd">
+        <div class="popular-bank">
+            <span class='popular-title' *ngIf="isBank">Popular banks</span>
+            <span class='popular-title' *ngIf="!isBank">Popular insurer</span>
+            <div class='d-flex-wrap bank-child'>
+                <div *ngFor="let bank of popularBank" (click)="getfip(bank.FIPID)"
+                    [ngClass]="isBank?'card-bank':'card-insurance card-bank'">
+                    <mat-card [ngClass]="bank.isChecked?'bank-colors':''" class='warning-fips'>
+                        <!-- select bank -->
+                        <!-- <mat-card class='warning-fips bank-colors '> -->
+                        <div class="choose-cards">
+                            <div class="choose-first">
+                                <div class="choose-img">
+                                    <img [src]="getLogo(bank.LOGO)" alt="icon" />
+                                </div>
+                            </div>
+                            <p class='bank-names'>{{bank.FIPNAME}}</p>
+                        </div>
+                        <input type="checkbox" [checked]="bank.isChecked" class="borders-bank" />
+                        <!-- <mat-checkbox [(ngModel)]="bank.isChecked"></mat-checkbox> -->
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>
+        <div class="popular-bank selected-bank" *ngIf="selectedBank.length>0">
+            <span class='popular-title' *ngIf="isBank">Selected Bank</span>
+            <span class='popular-title' *ngIf="!isBank">Selected insurer</span>
+            <div class='d-flex-wrap bank-child'>
+
+                <mat-card *ngFor="let bank of selectedBank" (click)="getfip(bank.FIPID)"
+                    [ngClass]="isBank?'card-bank':'card-insurance card-bank'">
+                    <div [ngClass]="bank.isChecked?'bank-colors':''" class='warning-fips '>
+                        <div class="choose-cards">
+                            <div class="choose-first">
+                                <div class="choose-img">
+                                    <img [src]="getLogo(bank.LOGO)" alt="icon" />
+                                </div>
+                            </div>
+                            <p class='bank-names'>{{bank.FIPNAME}}</p>
+                        </div>
+                        <input type="checkbox" [checked]="bank.isChecked" class="borders-bank" />
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="discover-card choose-footer   ">
+    <button class="bottom-button" [disabled]="disablebtn" (click)="discover()">Discover accounts</button>
+    <div class='footer_main'>
+        <span class="footer_text">Powered by RBI regulated Account Aggregator</span><img class='footer_image'
+            src="../../../assets/images/logo.svg" />
+    </div>
+</div>
+<!-- </div> -->

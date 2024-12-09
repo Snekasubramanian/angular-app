@@ -1,0 +1,42 @@
+<div class="drawer-height ">
+    <div class="box-grid">
+        <img src="../../../../assets/images/warning.gif" alt="icon" />
+        <h6>Oh no! We were unable to find your {{data}} account</h6>
+        <p *ngIf="currentCategory.match('BANK')">
+            There are no accounts linked to +91 {{XORDecryptRes.mobile}}
+        </p>
+        <p *ngIf="currentCategory.match('GSTR')">
+            There are no GST linked to {{XORDecryptRes.pan}} and +91 {{XORDecryptRes.mobile}}
+        </p>
+        <p *ngIf="currentCategory.match('MF')">
+            There are no mutual fund linked to {{XORDecryptRes.pan}} and +91 {{XORDecryptRes.mobile}}
+        </p>
+        <p *ngIf="currentCategory.match('EQUITIES')">
+            There are no investments linked to {{XORDecryptRes.pan}} and +91 {{XORDecryptRes.mobile}}
+        </p>
+        <p *ngIf="currentCategory.match('NPS')">
+            Your NPS account is not linked to +91 {{XORDecryptRes.mobile}}
+        </p>
+        <p *ngIf="currentCategory.match('INSURANCE_POLICIES')">
+            There are no policy linked to +91 {{XORDecryptRes.mobile}}
+        </p>
+    </div>
+    <div class="card-box">
+        <div *ngFor="let list of displayList">
+            <mat-card class='warning-fip' [ngClass]="selectedCard == list.id ? 'border-colors' : ''">
+                <div class="warning-gap" (click)="handleCardClick(list.id)">
+                    <h6>{{list.heading}}</h6>
+                    <p>{{list.description}}</p>
+                </div>
+                <input type="radio" [checked]="selectedCard == list.id" (click)="handleCardClick(list.id)"
+                    class="check-account" />
+            </mat-card>
+        </div>
+    </div>
+</div>
+<div class='bottom_card' [ngClass]="selectedCard == 0 ? ' ' : 'modal-btn'">
+    <button class="bottom-button" (click)="submitbtn()">{{buttonName}}</button>
+    <div class='footer_main'>
+        <span class="footer_text">Powered by RBI regulated Account Aggregator</span><img class='footer_image' src="../../../assets/images/logo.svg"/>
+      </div>
+</div>
